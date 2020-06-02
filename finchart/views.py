@@ -2,8 +2,8 @@ from django.shortcuts import render
 
 # Create your views here.
 from django.views import generic
-from django.views.generic import TemplateView
-from .models import Fstatement # この行を追加
+from django.views.generic import TemplateView, DetailView
+from .models import Company, Fstatement # この行を追加
 
 
 class IndexView(TemplateView): # クラス名を変更
@@ -17,4 +17,15 @@ class IndexView(TemplateView): # クラス名を変更
         }
         return params
 
+class CompanyView(DetailView):
+    model = Company
+
+    def get_context_data(self, **kwargs):
+        company_name = kwargs['object'].name
+        fstatement_list = Fstatement.objects.filter(company=kwargs['object']).order_by('-fiscal_year')[:4]
+        params = {
+            'company_name': company_name,
+            'fstatement_list': fstatement_list,
+        }
+        return params
 
