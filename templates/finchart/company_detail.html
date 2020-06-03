@@ -182,6 +182,64 @@
                 </div><!--card-->
             </div><!--col-->
         </div><!--row-->
+
+        <div class="row">
+            <div class="col">
+                <div class="card">
+                    <div class="card-header d-flex align-items-center">
+                        <h3 class="h4">推移グラフ</h3>
+                    </div><!--card header-->
+                    <div class="card-body">
+                        <canvas id="myChart" width="400" height="200"></canvas>  <!--実際にグラフを出す記述。-->
+                        <!--canvasタグのidに指定しているmyChartに対応する記述をすることで、ここにグラフが出力される。-->
+                        <script>
+
+                            var ctx = document.getElementById('myChart').getContext('2d');
+                            var label_fyear = [ {% for item in fstatement_list reversed %} "{{ item.fiscal_year }}", {% endfor %}];
+                            var data_sales = [ {% for item in fstatement_list reversed %} {{item.pl_gross_sales}}, {% endfor %} ];
+                            var data_gross_profit = [ {% for item in fstatement_list reversed %} {{item.pl_gross_profit}}, {% endfor %} ];
+                            var data_operating_profit = [ {% for item in fstatement_list reversed %} {{item.pl_operating_profit}}, {% endfor %} ];
+                            
+                            var myChart = new Chart(ctx, {
+                                type: 'line',
+                                data: {
+                                    labels: label_fyear,
+                                    datasets: [{
+                                        label: '売上高',
+                                        data: data_sales,
+                                        fill: false,
+                                        lineTension: 0,
+                                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                                        borderColor: 'rgba(255, 99, 132, 1)',
+                                        borderWidth: 2,
+                                    },{
+                                        label: '売上総利益',
+                                        data: data_gross_profit,
+                                        fill: false,
+                                        lineTension: 0,
+                                        backgroundColor:'rgba(54, 162, 235, 0.2)',
+                                        borderColor: 'rgba(54, 162, 235, 1)',
+                                        borderWidth: 2,
+                                    },{
+                                        label: '営業利益',
+                                        data: data_operating_profit,
+                                        fill: false,
+                                        lineTension: 0,
+                                        backgroundColor:'rgba(255, 206, 86, 0.2)',
+                                        borderColor: 'rgba(255, 206, 86, 1)',
+                                        borderWidth: 2,
+                                    },
+                                    ]
+                                },
+                                options: {
+                                }
+                            });
+                        </script>
+                    </div><!-- class card body -->
+                </div><!-- class card -->
+            </div><!-- col -->
+        </div><!-- row -->
+
     </div><!-- container-fluid -->
 </section>
 <br><br>
