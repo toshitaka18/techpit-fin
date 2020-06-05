@@ -18,7 +18,7 @@
                                 <tr>
                                     <th rowspan="2" width="120px"></th>
                                     {% for item in fstatement_list reversed %}
-                                        <th colspan="2" width="120px" class="center"><a href="">{{ item.fiscal_year }}</a></th>
+                                        <th colspan="2" width="120px" class="center"><a href="{% url 'finchart:fstatement' item.pk %}">{{ item.fiscal_year }}</a></th>
                                     {% endfor %}
                                 </tr>
                                 <tr style="text-align: center;">
@@ -95,7 +95,7 @@
                                 <tr>
                                 <th></th>
                                 {% for item in fstatement_list reversed %}
-                                    <th colspan="2" width="120px" class="center"><a href="">{{ item.fiscal_year }}</a></th>
+                                    <th colspan="2" width="120px" class="center"><a href="{% url 'finchart:fstatement' item.pk %}">{{ item.fiscal_year }}</a></th>
                                 {% endfor %}
                                 </tr>
                                 <tr>
@@ -146,7 +146,7 @@
                                 <tr>
                                 <th></th>
                                 {% for item in fstatement_list reversed %}
-                                    <th colspan="2" width="120px" class="center"><a href="">{{ item.fiscal_year }}</a></th>
+                                    <th colspan="2" width="120px" class="center"><a href="{% url 'finchart:fstatement' item.pk %}">{{ item.fiscal_year }}</a></th>
                                 {% endfor %}
                                 </tr>
                                 <tr>
